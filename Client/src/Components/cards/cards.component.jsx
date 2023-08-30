@@ -3,6 +3,7 @@ import Card from "../card/card.component";
 import styles from "./cards.module.css";
 
 const Cards = ({ products }) => {
+  console.log(products);
   return (
     <div className={styles.contenedorCards}>
       {products.map((product) => (
@@ -17,7 +18,6 @@ const Cards = ({ products }) => {
           price={product.price}
         />
       ))}
-
     </div>
   );
 };
