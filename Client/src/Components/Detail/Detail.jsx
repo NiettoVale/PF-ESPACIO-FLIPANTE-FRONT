@@ -47,7 +47,7 @@ export default function Detail() {
       <p>Nombre: {cardDetail.name}</p>
       {/* <p>Descripcion: {cardDetail.description}</p> */}
       <p>Genero: {cardDetail.gender}</p>
-      <p>Categoria: {cardDetail.fashion}</p>
+      <p>Categoria: {cardDetail.category}</p>
       <p>Material Principal: {cardDetail.mainMaterial}</p>
       <p>Precio: ${cardDetail.price}</p>
     </div>
