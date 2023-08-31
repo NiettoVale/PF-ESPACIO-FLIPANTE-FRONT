@@ -67,13 +67,12 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-
 ul,
 li {
   list-style: none;
   margin: 0;
   padding: 0;
-
+}
 select {
   height: 40px;
   padding-inline: 10px;
@@ -104,7 +103,6 @@ input {
 
 option {
   margin: 5px 0;
-
 }
 
 @media (prefers-color-scheme: light) {
