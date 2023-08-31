@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PRODUCTS, GET_PRODUCTSBYNAME } from "./actionTypes";
+import { GET_PRODUCTS, GET_PRODUCTSBYNAME, POST_PRODUCT, GET_SIZES } from "./actionTypes";
 
 export const getProducts = () => {
   return async (dispatch) => {
@@ -29,3 +29,28 @@ export const getProductsByName = (name) => {
     }
   };
 };
+
+export const postProduct = (productData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("http://localhost:3001/products", productData);
+      const createdProduct = response.data;
+      dispatch({ type: POST_PRODUCT, payload: createdProduct });
+      return createdProduct;
+    } catch (error) {
+      console.error("Error creating product:", error);
+    }
+  };
+};
+
+export const getSizes = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios("http://localhost:3001/sizes");
+      console.log(data, "soy data")
+      dispatch({ type: GET_SIZES, payload: data})
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
