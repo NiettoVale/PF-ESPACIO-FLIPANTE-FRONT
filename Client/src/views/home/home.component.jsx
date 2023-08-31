@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getProducts,
-} from "../../Redux/actions/productsActions";
+import { getProducts } from "../../Redux/actions/productsActions";
 import Cards from "../../Components/cards/cards.component";
 import Hero from "../../Components/Hero/Hero";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 
 import styles from "./home.module.css";
+import Footer from "../../Components/Footer/Footer";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -50,6 +49,8 @@ const Home = () => {
           <Cards products={products} />
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
