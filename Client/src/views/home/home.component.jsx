@@ -7,6 +7,7 @@ import SearchBar from "../../Components/SearchBar/SearchBar";
 import FilterBar from "../../Components/FilterBar/FilterBar";
 
 import styles from "./home.module.css";
+import Footer from "../../Components/Footer/Footer";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -50,6 +51,8 @@ const Home = () => {
           <Cards products={products} />
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
