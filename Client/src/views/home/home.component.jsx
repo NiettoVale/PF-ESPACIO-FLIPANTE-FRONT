@@ -7,6 +7,8 @@ import Cards from "../../Components/cards/cards.component";
 import Hero from "../../Components/Hero/Hero";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 
+import styles from "./home.module.css";
+
 const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
@@ -31,6 +33,7 @@ const Home = () => {
   return (
     <div>
       <Hero />
+
       <h1>ESPACIO FLIPANTE</h1>
       <SearchBar
         busqueda={busqueda}
@@ -39,6 +42,12 @@ const Home = () => {
       />
       <div className="cards-container">
         <Cards products={busqueda === "" ? products : productsByName} />
+      <div className={styles.catalogueSection}>
+        <h2>Catalogo</h2>
+        <p className={styles.catalogueSectionP}>ropa flipante</p>
+        <div className={styles.cardsContainer}>
+          <Cards products={products} />
+        </div>
       </div>
     </div>
   );

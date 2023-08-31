@@ -1,53 +1,72 @@
 .cardContainer {
-    position: relative;
-    width: 350px;
-    height: 400px;
-  
-    border: 1px solid #ccc;
-    border-radius: 20px;
-  
-    padding: 20px;
-    background-color: #282c34;
-    color: white;
-  
-    transform: scale(0.8);
-    transition: transform 0.3s ease;
-  
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-  
-    text-align: justify;
-    font-size: 17px;
-  }
-  
-  .imgCard {
-    border-radius: 10px;
-    margin: 0 auto 10px;
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-  }
-  .cardContainer p {
-    margin-bottom: 5px;
-  }
-  
-  .cardContainer .genres {
-    color: var(--color4);
-  }
-  
-  .cardContainer .detailLink {
-    color: #fff;
-    background-color: var(--color2);
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 17px;
-  }
-  
-  .cardContainer .detailLink:hover {
-    background-color: #574a85;
-    cursor: pointer;
-  }
+  width: 330px;
+  height: 520px;
+  margin: 10px;
+
+  /* border: solid 1px #333; */
+
+  background-color: #fff;
+  color: #333;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  text-align: left;
+
+  transition: 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.cardContainer:hover {
+  box-shadow: 0 0 50px #dddddd;
+}
+.hoverMessage {
+  transition: 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  position: absolute;
+  opacity: 0;
+  width: 330px;
+  text-align: center;
+
+  padding: 8px 0;
+  margin-top: 380px;
+
+  color: #fff;
+  background-color: #333333da;
+}
+.cardContainer:hover .hoverMessage {
+  opacity: 1;
+}
+
+.imgCard {
+  margin: 0;
+  margin-bottom: 10px;
+
+  width: 330px;
+  height: 420px;
+
+  object-fit: cover;
+  object-position: center;
+}
+.cardInfo p {
+  margin: 0 5px;
+}
+.cardName {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 16px;
+}
+.cardCategory {
+  color: #999;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.cardPrice {
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
