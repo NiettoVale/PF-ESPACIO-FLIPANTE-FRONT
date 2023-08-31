@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../Redux/actions/productsActions";
 import Cards from "../../Components/cards/cards.component";
@@ -15,12 +15,16 @@ const Home = () => {
   const [busqueda, setBusqueda] = useState("");
   const [productsByName, setProductsByName] = useState([]);
 
-  const filterSearch = (searchTerm) => {
-    const filteredProducts = products.filter((product) =>
-      product.name.includes(searchTerm)
-    );
-    setProductsByName(filteredProducts);
-  };
+  const filterSearch = useCallback(
+    (searchTerm) => {
+      const lowerCaseSearchTerm = searchTerm.toLowerCase();
+      const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(lowerCaseSearchTerm)
+      );
+      setProductsByName(filteredProducts);
+    },
+    [products]
+  );
 
   useEffect(() => {
     if (busqueda === "" || busqueda === null) {
@@ -28,7 +32,8 @@ const Home = () => {
     } else {
       filterSearch(busqueda);
     }
-  }, [dispatch, busqueda]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [busqueda, dispatch]);
 
   return (
     <div>
@@ -42,7 +47,11 @@ const Home = () => {
         filterSearch={filterSearch}
       />
       <div className="cards-container">
-        <Cards products={busqueda === "" ? products : productsByName} />
+        {busqueda === "" || productsByName.length > 0 ? (
+          <Cards products={busqueda === "" ? products : productsByName} />
+        ) : (
+          <p>No se encontraron productos.</p>
+        )}
       </div>
       <div className={styles.catalogueSection}>
         <h2>Catalogo</h2>
