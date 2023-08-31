@@ -3,23 +3,21 @@
   width: 98.9vw;
   margin: 0;
 
-  background-image: url(../../assets/landing.jpg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url(../../assets/landing2.jpg);
   background-position: center;
   background-size: cover;
 
   user-select: none;
-
-  display: flex;
-  justify-content: center;
 }
 
-.heroText {
-  position: absolute;
-  top: 140px;
-}
 .heroText h3,
-h1,
-h2 {
+.heroText h1,
+.heroText h2 {
+  text-transform: uppercase;
   margin: 0;
   text-shadow: #333 2px 2px 5px;
 }
@@ -42,12 +40,18 @@ h2 {
 .heroText h2 {
   line-height: 0;
   font-size: 64px;
+
   color: #fff;
 }
 .heroText button {
   margin-top: 70px;
+
   border-radius: 50px;
   border: solid 2px #fff;
+
   color: #fff;
-  background-color: #bb00ff;
+  background-color: #e100ff;
+
+  font-weight: 600;
+  text-transform: uppercase;
 }
