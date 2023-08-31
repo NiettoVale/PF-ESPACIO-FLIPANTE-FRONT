@@ -42,6 +42,7 @@ const Home = () => {
       />
       <div className="cards-container">
         <Cards products={busqueda === "" ? products : productsByName} />
+      </div>
       <div className={styles.catalogueSection}>
         <h2>Catalogo</h2>
         <p className={styles.catalogueSectionP}>ropa flipante</p>
