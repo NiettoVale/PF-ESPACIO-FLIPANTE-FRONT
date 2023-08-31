@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Detail from "./Components/Detail/Detail";
+import Detail from "./views/Detail/Detail";
 import store from "./Redux/store/store";
 import Home from "./views/home/home.component";
 import { getProducts } from "./Redux/actions/productsActions";
@@ -27,7 +27,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/home" element={<Home products={products} />} />
-          <Route path="/detail/:id" element={<Detail/>}/>
+          <Route path="/detail/:id" element={<Detail />} />
           {/* Otros rutas aquí */}
         </Routes>
       </Router>
