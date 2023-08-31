@@ -2,8 +2,9 @@ import PropTypes from "prop-types";
 import Card from "../card/card.component";
 import styles from "./cards.module.css";
 
+
 const Cards = ({ products }) => {
-  console.log(products);
+  
   return (
     <div className={styles.contenedorCards}>
       {products.map((product) => (

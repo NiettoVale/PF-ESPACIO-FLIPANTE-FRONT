@@ -1,9 +1,10 @@
 import {
-  GET_PRODUCTS,
+  GET_PRODUCTS, GET_PRODUCTSBYNAME,
 } from "../actions/actionTypes";
 
 const initialState = {
   products: [],
+  productsByname: [],
 }
 
 const productsReducer = (state = initialState, action) => {
@@ -13,6 +14,11 @@ const productsReducer = (state = initialState, action) => {
               ...state,
               products: action.payload
           };
+      case GET_PRODUCTSBYNAME:
+        return {
+          ...state,
+          productsByname: action.payload
+        }
       default:
           return state;
   }
