@@ -12,7 +12,7 @@ const Cards = ({ products }) => {
           id={product.id}
           name={product.name}
           gender={product.gender}
-          fashion={product.fashion}
+          category={product.category}
           mainMaterial={product.mainMaterial}
           images={product.images}
           price={product.price}

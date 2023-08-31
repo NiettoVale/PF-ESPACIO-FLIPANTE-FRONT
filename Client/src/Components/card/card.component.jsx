@@ -1,29 +1,31 @@
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import styles from "./card.module.css";
 
-const Card = ({ name, images, price, id }) => {
+const Card = ({ name, images, price, category, id }) => {
   return (
-    <div className={styles.cardContainer}>
-      {/* Mostrar la imagen */}
-      {images ? (
-        <img src={images[0]} alt={name} className={styles.imgCard} />
-      ) : (
-        <img
-          src="https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif"
-          alt="Cargando..."
-        />
-      )}
+    <Link to={`/detail/${id}`}>
+      <div className={styles.cardContainer}>
+        <p className={styles.hoverMessage}>VER DETALLES</p>
 
-      {/* Información relevante */}
-      <p>Nombre: {name}</p>
-      <p>Precio: ${price}</p>
+        {/* Mostrar la imagen */}
+        {images ? (
+          <img src={images[0]} alt={name} className={styles.imgCard} />
+        ) : (
+          <img
+            src="https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif"
+            alt="Cargando..."
+          />
+        )}
 
-      <div>
-        <Link to={`/detail/${id}`}>
-          <button>Detalle</button>
-        </Link>
+        {/* Información relevante */}
+
+        <div className={styles.cardInfo}>
+          <p className={styles.cardName}>{name}</p>
+          <p className={styles.cardCategory}>{category}</p>
+          <p className={styles.cardPrice}>${price}</p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
