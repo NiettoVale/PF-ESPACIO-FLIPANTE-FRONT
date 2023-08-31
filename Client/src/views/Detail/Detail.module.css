@@ -89,3 +89,13 @@
   border: solid 1px #333;
   color: #fff;
 }
+
+@media (max-width: 910px) {
+  .detailContainer {
+    width: 360px;
+  }
+
+  .detailName {
+    margin: 30px 0 10px 0;
+  }
+}
