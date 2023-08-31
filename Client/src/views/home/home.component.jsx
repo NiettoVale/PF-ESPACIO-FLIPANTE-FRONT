@@ -4,6 +4,7 @@ import { getProducts } from "../../Redux/actions/productsActions";
 import Cards from "../../Components/cards/cards.component";
 import Hero from "../../Components/Hero/Hero";
 import SearchBar from "../../Components/SearchBar/SearchBar";
+import FilterBar from "../../Components/FilterBar/FilterBar";
 
 import styles from "./home.module.css";
 import Footer from "../../Components/Footer/Footer";
@@ -34,6 +35,7 @@ const Home = () => {
       <Hero />
 
       <h1>ESPACIO FLIPANTE</h1>
+      <FilterBar />
       <SearchBar
         busqueda={busqueda}
         setBusqueda={setBusqueda}
