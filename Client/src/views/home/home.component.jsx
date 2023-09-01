@@ -6,6 +6,7 @@ import Hero from "../../Components/Hero/Hero";
 import NavBar from "../../Components/NavBar/navBar"; // Asegúrate de tener la ruta correcta
 import FilterBar from "../../Components/FilterBar/FilterBar";
 import SearchBar from "../../Components/SearchBar/SearchBar";
+import ProductSlider from "../../Components/ProductSlider/ProductSlider";
 
 import styles from "./home.module.css";
 import Footer from "../../Components/Footer/Footer";
@@ -38,6 +39,7 @@ const Home = () => {
   return (
     <div>
       <Hero />
+      <ProductSlider />
 
       <h1>ESPACIO FLIPANTE</h1>
       <div className={styles.navBarWithSearch}>
