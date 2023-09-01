@@ -1,11 +1,13 @@
 import {
-  GET_PRODUCTS, GET_PRODUCTSBYNAME, GET_SIZES, POST_PRODUCT
+  GET_PRODUCTS, GET_PRODUCTSBYNAME, GET_SIZES, POST_PRODUCT, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT 
 } from "../actions/actionTypes";
 
 const initialState = {
   products: [],
   productsByname: [],
-  sizes: []
+  sizes: [],
+  user: null,
+  error: null,
 }
 
 const productsReducer = (state = initialState, action) => {
@@ -30,7 +32,25 @@ const productsReducer = (state = initialState, action) => {
         return {
           ...state,
           sizes: action.payload
-        }
+        };
+        case LOGIN_SUCCESS:
+          return {
+            ...state,
+            user: action.payload,
+            error: null,
+          };
+        case LOGIN_ERROR:
+          return {
+            ...state,
+            user: null,
+            error: action.payload,
+          };
+        case LOGOUT:
+          return {
+            ...state,
+            user: null,
+            error: null,
+          };  
       default:
           return state;
   }
