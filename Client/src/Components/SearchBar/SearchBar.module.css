@@ -1,0 +1,20 @@
+/* SearchBar.module.css */
+
+.searchBarContainer {
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  /* Estilos para el campo de búsqueda */
+}
+
+.flexSpace {
+  flex: 1;
+}
+
+.link {
+  text-decoration: none;
+  margin-right: 16px;
+  /* Estilos para los enlaces "ACCESO" y "CARRITO" */
+}
