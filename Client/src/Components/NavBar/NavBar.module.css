@@ -1,9 +1,9 @@
-.genderNav {
+.navBar {
   display: flex;
   gap: 16px; /* Espacio entre los elementos */
 }
 
-.genderNav a {
+.navBar a {
   text-decoration: none;
   color: black;
 }
