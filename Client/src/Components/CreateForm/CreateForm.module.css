@@ -1,9 +1,26 @@
 .create-form {
-  width: 70%;
+  text-align: left;
+  width: 320px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.create-form div {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.create-form button {
+  margin-top: 10px;
+}
+.create-form input,
+.create-form select {
+  margin: 0;
 }
 
 .error-message {
@@ -17,9 +34,7 @@
 }
 
 .input-label {
-  width: 150px;
   font-weight: bold;
-  margin-right: 10px;
 }
 
 .input-field {
@@ -58,21 +73,6 @@
   display: flex;
   align-items: center;
   margin: 5px 0;
-}
-
-.stock-input {
-  width: 50px;
-  margin-right: 10px;
-}
-
-.submit-button {
-  margin-top: 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .stock-input-container {
