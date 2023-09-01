@@ -6,10 +6,8 @@ const NavBar = () => {
     <div className={styles.navContainer}>
       <div className={styles.navBar}>
         <div className={styles.genderNav}>
-          <a>ADULTOS</a>
-          <a>NIÑOS</a>
-          <a>HENRY SALE</a>
-          <a>CONTACTO</a>
+          <a>CATALOGO</a>
+          <a>OFERTAS</a>
         </div>
       </div>
     </div>
