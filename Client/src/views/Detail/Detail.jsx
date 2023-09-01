@@ -59,6 +59,14 @@ export default function Detail() {
         <div className={styles.detailInfo}>
           <p className={styles.detailName}>{cardDetail.name}</p>
 
+          <div className={styles.sizesButtons}>
+            <button>S</button>
+            <button>M</button>
+            <button>L</button>
+            <button>XL</button>
+            <button>XXL</button>
+          </div>
+
           <div>
             <p className={styles.detailDescription}>{cardDetail.description}</p>
             <p className={styles.detailGender}>Genero: {cardDetail.gender}</p>
