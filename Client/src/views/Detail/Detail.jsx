@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from "./Detail.module.css";
+import NavBar from "../../Components/NavBar/navBar";
 
 export default function Detail() {
   const { id } = useParams();
@@ -37,6 +38,7 @@ export default function Detail() {
   console.log(imageDetail);
   return (
     <div>
+      <NavBar />
       <Link to={"/home"}>
         <button className={styles.backButton}>⬅</button>
       </Link>
