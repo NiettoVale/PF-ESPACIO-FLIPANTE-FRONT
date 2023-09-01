@@ -1,10 +1,11 @@
-import { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../Redux/actions/productsActions";
 import Cards from "../../Components/cards/cards.component";
 import Hero from "../../Components/Hero/Hero";
-import SearchBar from "../../Components/SearchBar/SearchBar";
+import NavBar from "../../Components/NavBar/navBar"; // Asegúrate de tener la ruta correcta
 import FilterBar from "../../Components/FilterBar/FilterBar";
+import SearchBar from "../../Components/SearchBar/SearchBar";
 
 import styles from "./home.module.css";
 import Footer from "../../Components/Footer/Footer";
@@ -32,7 +33,6 @@ const Home = () => {
     } else {
       filterSearch(busqueda);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [busqueda, dispatch]);
 
   return (
@@ -40,12 +40,18 @@ const Home = () => {
       <Hero />
 
       <h1>ESPACIO FLIPANTE</h1>
+      <div className={styles.navBarWithSearch}>
+        <NavBar />
+        <div className={styles.spaceBetween}></div>{" "}
+        {/* Espacio entre NavBar y SearchBar */}
+        <SearchBar
+          busqueda={busqueda}
+          setBusqueda={setBusqueda}
+          filterSearch={filterSearch}
+        />
+      </div>
+
       <FilterBar />
-      <SearchBar
-        busqueda={busqueda}
-        setBusqueda={setBusqueda}
-        filterSearch={filterSearch}
-      />
       <div className="cards-container">
         {busqueda === "" || productsByName.length > 0 ? (
           <Cards products={busqueda === "" ? products : productsByName} />

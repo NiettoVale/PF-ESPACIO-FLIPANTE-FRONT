@@ -1,0 +1,16 @@
+.navBar1 {
+  display: flex;
+  justify-content: space-between; /* Distribuye los elementos con espacio entre ellos */
+  align-items: center; /* Centra verticalmente los elementos */
+  padding: 16px; /* Añade espacio interno para separar de los bordes */
+}
+
+.genderNav {
+  display: flex;
+  gap: 16px; /* Espacio entre los elementos */
+}
+
+.genderNav a {
+  text-decoration: none;
+  color: black;
+}
