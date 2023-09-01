@@ -1,5 +1,9 @@
 import Card from "../card/card.component";
 import styles from "./cards.module.css";
+
+
+const Cards = ({ products }) => {
+
 import { useSelector } from "react-redux";
 
 const Cards = ({ products }) => {
@@ -12,6 +16,7 @@ const Cards = ({ products }) => {
     }
     return 0; // No aplicar ordenamiento
   });
+
 
   return (
     <div className={styles.contenedorCards}>
