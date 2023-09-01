@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Detail from "./views/Detail/Detail";
 import store from "./Redux/store/store";
 import Home from "./views/home/home.component";
+import CreateProduct from "./views/create/create.view";
 import { getProducts } from "./Redux/actions/productsActions";
 import "./App.css";
 
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/home" element={<Home products={products} />} />
           <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/create" element={<CreateProduct/>}/>
           {/* Otros rutas aquí */}
         </Routes>
       </Router>

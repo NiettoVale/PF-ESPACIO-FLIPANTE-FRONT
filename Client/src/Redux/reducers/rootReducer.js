@@ -1,10 +1,11 @@
 import {
-  GET_PRODUCTS, GET_PRODUCTSBYNAME,
+  GET_PRODUCTS, GET_PRODUCTSBYNAME, GET_SIZES, POST_PRODUCT
 } from "../actions/actionTypes";
 
 const initialState = {
   products: [],
   productsByname: [],
+  sizes: []
 }
 
 const productsReducer = (state = initialState, action) => {
@@ -18,6 +19,17 @@ const productsReducer = (state = initialState, action) => {
         return {
           ...state,
           productsByname: action.payload
+        }
+      case POST_PRODUCT:
+        return {
+            ...state,
+            products: [...state.products, action.payload]
+          };
+      case GET_SIZES:
+        console.log("este es el reducer", state.sizes)
+        return {
+          ...state,
+          sizes: action.payload
         }
       default:
           return state;
