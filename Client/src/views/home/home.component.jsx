@@ -13,6 +13,7 @@ import Footer from "../../Components/Footer/Footer";
 const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+  const productFiltered = useSelector((state) => state.productsFiltered);
   const [busqueda, setBusqueda] = useState("");
   const [productsByName, setProductsByName] = useState([]);
 
@@ -63,7 +64,9 @@ const Home = () => {
         <h2>Catalogo</h2>
         <p className={styles.catalogueSectionP}>ropa flipante</p>
         <div className={styles.cardsContainer}>
-          <Cards products={products} />
+          <Cards
+            products={productFiltered.length > 0 ? productFiltered : products}
+          />
         </div>
       </div>
 

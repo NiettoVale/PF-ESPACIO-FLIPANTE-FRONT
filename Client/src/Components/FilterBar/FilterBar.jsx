@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styles from "./FilterBar.module.css";
+import { getFiltes } from "../../Redux/actions/productsActions";
 
 const FilterBar = () => {
+  const dispatch = useDispatch();
+
+  const [dataFilter, setDataFilter] = useState({
+    category: "",
+    size: "",
+    gender: "",
+  });
+  
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setDataFilter((prevData) => ({ ...prevData, [name]: value }));
+    dispatch(getFiltes());
+  };
+
   return (
     <div className={styles.FilterBarContainer}>
       <div className={styles.genderFilter}>
-        <a>HOMBRE</a>
+        <a onChange={handleChange}>HOMBRE</a>
         <a>MUJER</a>
         <a>NIÑO</a>
         <a>NIÑA</a>
@@ -13,7 +29,7 @@ const FilterBar = () => {
 
       <div className={styles.selectContainer}>
         <div className={styles.categorySelect}>
-          <select name="category" id="">
+          <select onChange={handleChange} name="category" id="">
             <option value="Todos">sin filtrar</option>
             <option value="Campera">Campera</option>
             <option value="Buzo">Buzo</option>
@@ -24,7 +40,7 @@ const FilterBar = () => {
           </select>
         </div>
         <div className={styles.orderSelect}>
-          <select name="category" id="">
+          <select onChange={handleChange} name="category" id="">
             <option value="AtoZ">A - Z</option>
             <option value="ZtoA">Z - A</option>
             <option value="Mayor">MAYOR PRECIO</option>
