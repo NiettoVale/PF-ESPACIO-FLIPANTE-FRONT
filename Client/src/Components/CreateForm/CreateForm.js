@@ -213,7 +213,7 @@ const CreateForm = () => {
     ))} */}
   </div>
   <div className={styles["stock-column"]}>
-    <label className={styles["stock-label"]}>Stock</label>
+    <label className={styles["stock-label"]}>Stock </label>
     {/* {sizes.map((size) => (
       <div key={size} className={styles["stock-item"]}>
         <Controller
