@@ -6,6 +6,8 @@ import store from "./Redux/store/store";
 import Home from "./views/home/home.component";
 import CreateProduct from "./views/create/create.view";
 import { getProducts } from "./Redux/actions/productsActions";
+import Registro from "./Components/RegisterUser/registerUser.component";
+import LoginForm from "./Components/Login/LoginForm.component";
 import "./App.css";
 
 function App() {
@@ -30,7 +32,8 @@ function App() {
           <Route path="/home" element={<Home products={products} />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/create" element={<CreateProduct/>}/>
-          {/* Otros rutas aquí */}
+          <Route path="/login" element={<LoginForm/>}/>
+          <Route path="/register" element={<Registro/>}/>    
         </Routes>
       </Router>
     </Provider>
