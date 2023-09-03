@@ -14,7 +14,9 @@ const NavBar = () => {
       </div>
 
       <div>
+             
         <a className={styles.link}>ACCESO</a>
+      
         <a className={styles.link}>CARRITO</a>
       </div>
     </div>

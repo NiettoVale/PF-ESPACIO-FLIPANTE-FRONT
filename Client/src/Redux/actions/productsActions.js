@@ -42,7 +42,6 @@ export const getSizes = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios("http://localhost:3001/sizes");
-      console.log(data, "soy data");
       dispatch({ type: GET_SIZES, payload: data });
     } catch (error) {
       console.error(error);
