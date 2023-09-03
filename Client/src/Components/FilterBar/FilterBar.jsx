@@ -115,7 +115,7 @@ const FilterBar = () => {
         </div>
 
         <select name="sizes" value={dataFilter.size} onChange={handleSizes}>
-          <option value="">Seleccionar talles</option>
+          <option value="">Seleccionar talless</option>
           {sizes.map((size, index) => (
             <option key={index} value={size}>
               {size}
