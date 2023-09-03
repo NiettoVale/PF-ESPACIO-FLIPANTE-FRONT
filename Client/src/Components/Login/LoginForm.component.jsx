@@ -78,9 +78,6 @@ const LoginForm = () => {
 
           <div className={styles.internalLogin}>
             <button type="submit">Iniciar Sesión</button>
-            <Link to="/register">
-              <button>Registrarse</button>
-            </Link>
           </div>
 
           <div className={styles.externalLogin}>
