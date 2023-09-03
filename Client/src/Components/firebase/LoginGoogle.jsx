@@ -4,6 +4,9 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 
+import styles from "./LoginButtons.module.css";
+import { AiFillGoogleCircle } from "react-icons/ai";
+
 function GoogleLogin() {
   const navigate = useNavigate();
   const handleGoogleLogin = async () => {
@@ -18,7 +21,12 @@ function GoogleLogin() {
     }
   };
 
-  return <button onClick={handleGoogleLogin}>Login with Google</button>;
+  return (
+    <button onClick={handleGoogleLogin} className={styles.loginButtons}>
+      <AiFillGoogleCircle className={styles.googleIcon} />
+      Accede con Google
+    </button>
+  );
 }
 
 export default GoogleLogin;

@@ -17,10 +17,11 @@ export default function SearchBar({ busqueda, setBusqueda, filterSearch }) {
         className={styles.searchInput}
       />
       <div className={styles.flexSpace}></div>
-      <Link to={"/login"}> 
-      <a className={styles.link}>ACCESO</a>
+      <Link to={"/login"} className={styles.link}>
+        ACCESO
       </Link>
-      <a className={styles.link}>CARRITO</a>
+
+      <Link className={styles.link}>CARRITO</Link>
     </div>
   );
 }
