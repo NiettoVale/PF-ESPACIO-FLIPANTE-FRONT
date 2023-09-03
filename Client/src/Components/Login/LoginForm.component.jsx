@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 // import { useDispatch } from 'react-redux';
 // import { loginUserAction }  from '../../Redux/actions/usersActions';
 import { Link,useNavigate} from 'react-router-dom';
+import FacebookLogin from '../firebase/LoginFacebook';
+import GoogleLogin from '../firebase/LoginGoogle';
 
 const LoginForm = () => {
   // const dispatch = useDispatch();
@@ -81,6 +83,10 @@ const LoginForm = () => {
       <Link to="/register">
         <button>Registrarse</button>
       </Link>
+      <div>
+      <GoogleLogin/>
+      <FacebookLogin/>
+      </div>
     </form>
   );
 };
