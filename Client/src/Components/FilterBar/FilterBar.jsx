@@ -29,11 +29,6 @@ const FilterBar = () => {
     setDataFilter((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleOrderChange = (event) => {
-    const { name, value } = event.target;
-    setDataFilter((prevData) => ({ ...prevData, [name]: value }));
-  };
-
   const handleSizes = (event) => {
     const { name, value } = event.target;
     setDataFilter((prevData) => ({ ...prevData, [name]: value }));
@@ -109,7 +104,6 @@ const FilterBar = () => {
               </option>
               <option value="asc">A-Z</option>
               <option value="desc">Z-A</option>
-              <option value="">Desordenar</option>
             </select>
           </div>
         </div>

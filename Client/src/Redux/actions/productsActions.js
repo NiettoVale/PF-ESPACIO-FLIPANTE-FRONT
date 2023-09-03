@@ -14,9 +14,12 @@ export const getProducts = () => {
     try {
       const response = await axios.get("http://localhost:3001/products");
       const products = response.data;
+
       dispatch({ type: GET_PRODUCTS, payload: products });
+
       return products;
     } catch (error) {
+      alert("Algo salió mal!!!");
       console.error("Error fetching products:", error);
     }
   };
@@ -30,9 +33,12 @@ export const postProduct = (productData) => {
         productData
       );
       const createdProduct = response.data;
+
       dispatch({ type: POST_PRODUCT, payload: createdProduct });
+
       return createdProduct;
     } catch (error) {
+      alert("Algo salió mal!!!");
       console.error("Error creating product:", error);
     }
   };
@@ -42,8 +48,10 @@ export const getSizes = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios("http://localhost:3001/sizes");
+
       dispatch({ type: GET_SIZES, payload: data });
     } catch (error) {
+      alert("Algo salió mal!!!");
       console.error(error);
     }
   };
@@ -53,8 +61,10 @@ export const getGenders = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios("http://localhost:3001/gender");
+
       dispatch({ type: GET_GENDER, payload: data });
     } catch (error) {
+      alert("Algo salió mal!!!");
       console.error(error);
     }
   };
@@ -64,8 +74,10 @@ export const getCategory = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios("http://localhost:3001/category");
+
       dispatch({ type: GET_CATEGORY, payload: data });
     } catch (error) {
+      alert("Algo salió mal!!!");
       console.error(error);
     }
   };
@@ -74,15 +86,13 @@ export const getCategory = () => {
 export const getFilters = (dataFilter) => {
   return async (dispatch) => {
     try {
-      // Verifica si todas las propiedades de dataFilter están vacías
       const isDataFilterEmpty = Object.values(dataFilter).every(
         (value) => value === ""
       );
 
       if (isDataFilterEmpty) {
-        // Si todas están vacías, envía un array vacío como payload
         dispatch({ type: FILTER, payload: [] });
-        return; // Sal de la función
+        return;
       }
 
       const response = await fetch("http://localhost:3001/filter", {
@@ -101,6 +111,7 @@ export const getFilters = (dataFilter) => {
 
       dispatch({ type: FILTER, payload: data });
     } catch (error) {
+      alert("Algo salió mal!!!");
       console.log(error);
     }
   };

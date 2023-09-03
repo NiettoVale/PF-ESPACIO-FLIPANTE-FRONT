@@ -1,22 +1,6 @@
-// import React from "react";
-
-// export default function SearchBar({ busqueda, setBusqueda, filterSearch }) {
-//   const handleChange = (event) => {
-//     setBusqueda(event.target.value);
-//     filterSearch(event.target.value);
-//   };
-
-//   return (
-//     <div>
-//       <input type="search" value={busqueda} onChange={handleChange} />
-//       <a>ACCESO</a>
-//       <a>CARRITO</a>
-//     </div>
-//   );
-// }
-
 import React from "react";
 import styles from "./SearchBar.module.css";
+import { Link } from "react-router-dom";
 
 export default function SearchBar({ busqueda, setBusqueda, filterSearch }) {
   const handleChange = (event) => {
@@ -33,8 +17,11 @@ export default function SearchBar({ busqueda, setBusqueda, filterSearch }) {
         className={styles.searchInput}
       />
       <div className={styles.flexSpace}></div>
-      <a className={styles.link}>ACCESO</a>
-      <a className={styles.link}>CARRITO</a>
+      <Link to={"/login"} className={styles.link}>
+        ACCESO
+      </Link>
+
+      <Link className={styles.link}>CARRITO</Link>
     </div>
   );
 }
