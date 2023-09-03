@@ -1,5 +1,3 @@
-// PULL
-
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from "./Detail.module.css";
@@ -14,28 +12,26 @@ export default function Detail() {
     const fetchData = async () => {
       try {
         const response = await fetch(`http://localhost:3001/detail/${id}`);
-        console.log(response);
-        if (!response.ok) {
-          throw new Error("Error al obtener los productos");
-        }
 
         const data = await response.json();
-        console.log(data, "soy la data");
-        if (data.name) {
+
+        if (response.status === 200) {
           setCardDetail(data);
           setImageDetail(data.images);
-        } else {
-          window.alert("No hay productos con ese ID");
+        } else if (response.status === 400) {
+          alert(data.error);
+        } else if (response.status === 500) {
+          alert(data.error);
         }
       } catch (error) {
-        alert(error.message);
+        alert("Algo salió mal!!!");
+        console.log(error.message);
       }
     };
 
     fetchData();
   }, [id]);
 
-  console.log(imageDetail);
   return (
     <div>
       <NavBar />

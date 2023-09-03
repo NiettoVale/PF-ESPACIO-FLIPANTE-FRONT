@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { loginUserAction }  from '../../Redux/actions/usersActions';
-import { Link,useNavigate} from 'react-router-dom';
-import FacebookLogin from '../firebase/LoginFacebook';
-import GoogleLogin from '../firebase/LoginGoogle';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import FacebookLogin from "../firebase/LoginFacebook";
+import GoogleLogin from "../firebase/LoginGoogle";
 
 const LoginForm = () => {
-  // const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    name: '',
-    password: '',
+    name: "",
+    password: "",
   });
 
-  
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -20,17 +16,9 @@ const LoginForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // Envía los datos del formulario al servidor
-  //   dispatch(loginUserAction(formData));
-  // };
-
-  // Creamos una función que se ejecuta cuando enviamos el formulario.
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Realizamos una petición al backend usando fetch y le pasamos el método y lo que le queremos enviar.
       const response = await fetch("http://localhost:3001/login", {
         method: "POST",
         headers: {
@@ -38,25 +26,25 @@ const LoginForm = () => {
         },
         body: JSON.stringify(formData),
       });
-      // Obtenemos los datos de la respuesta de la petición y los almacenamos
+
       const responseData = await response.json();
 
-      // Verificamos el estado de las posibles respuestas del servidor y mostramos adecuadamente los mensajes:
       if (response.status === 200) {
         alert(responseData.message);
-        navigate('/home');
-        
-        
-        // window.location.reload();
+        navigate("/home");
+      } else if (response.status === 404) {
+        alert(responseData.error);
+      } else if (response.status === 401) {
+        alert(responseData.error);
+      } else if (response.status === 500) {
+        alert(responseData.error);
       }
     } catch (error) {
-      // Si hubo algún error que no es del servidor, lo mostramos
       alert("Algo salió mal.");
       console.log(error.message);
     }
   };
 
-  // console.log(formData)
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -66,7 +54,7 @@ const LoginForm = () => {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          placeholder='nombre de usuario o email'
+          placeholder="nombre de usuario o email"
         />
       </div>
       <div>
@@ -76,16 +64,16 @@ const LoginForm = () => {
           name="password"
           value={formData.password}
           onChange={handleChange}
-          placeholder='password'
+          placeholder="password"
         />
       </div>
-      <button type="submit" >Iniciar Sesión</button>
+      <button type="submit">Iniciar Sesión</button>
       <Link to="/register">
         <button>Registrarse</button>
       </Link>
       <div>
-      <GoogleLogin/>
-      <FacebookLogin/>
+        <GoogleLogin />
+        <FacebookLogin />
       </div>
     </form>
   );
