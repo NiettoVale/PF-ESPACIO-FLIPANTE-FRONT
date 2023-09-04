@@ -1,12 +1,16 @@
 import axios from "axios";
 import {
   GET_PRODUCTS,
-  POST_PRODUCT,
   GET_SIZES,
-  FILTER,
   GET_CATEGORY,
   GET_GENDER,
+  GET_FAVORITES,
+  POST_PRODUCT,
+  FILTER,
   ORDER,
+  SET_USER,
+  LOG_OUT,
+  POST_FAVORITE,
 } from "./actionTypes";
 
 export const getProducts = () => {
@@ -27,21 +31,45 @@ export const getProducts = () => {
   };
 };
 
-export const postProduct = (productData) => {
+export const getFavorites = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        "https://espacioflipante.onrender.com/products",
-        productData
+      const response = await fetch(
+        `https://espacioflipante.onrender.com/favorites/${id}`
       );
-      const createdProduct = response.data;
 
-      dispatch({ type: POST_PRODUCT, payload: createdProduct });
+      if (!response.ok) {
+        throw new Error("Error en la solicitud");
+      }
 
-      return createdProduct;
+      const data = await response.json();
+
+      dispatch({ type: GET_FAVORITES, payload: data.favorites });
     } catch (error) {
       alert("Algo salió mal!!!");
-      console.error("Error creating product:", error);
+      console.log(error);
+    }
+  };
+};
+
+export const setUser = (userData) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: SET_USER, payload: userData });
+    } catch (error) {
+      alert("Algo salió mal!!!");
+      console.log(error);
+    }
+  };
+};
+
+export const logOut = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: LOG_OUT });
+    } catch (error) {
+      alert("Algo salió mal!!!");
+      console.log(error);
     }
   };
 };
@@ -124,6 +152,41 @@ export const getFilters = (dataFilter) => {
     } catch (error) {
       alert("Algo salió mal!!!");
       console.log(error);
+    }
+  };
+};
+
+export const postProduct = (productData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        "https://espacioflipante.onrender.com/products",
+        productData
+      );
+      const createdProduct = response.data;
+
+      dispatch({ type: POST_PRODUCT, payload: createdProduct });
+
+      return createdProduct;
+    } catch (error) {
+      alert("Algo salió mal!!!");
+      console.error("Error creating product:", error);
+    }
+  };
+};
+
+export const favorite = async (userId, productId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `https://espacioflipante.onrender.com/user/${userId}/products/${productId}/favorite`
+      );
+      const favoriteProduct = response.data;
+
+      dispatch({ type: POST_FAVORITE, payload: favoriteProduct });
+    } catch (error) {
+      alert("Algo salió mal!!!");
+      console.error("Error creating product:", error);
     }
   };
 };

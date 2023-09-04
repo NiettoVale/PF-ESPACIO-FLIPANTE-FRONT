@@ -6,3 +6,7 @@ export const GET_CATEGORY = "GET_CATEGORY";
 export const GET_SIZES = "GET_SIZES";
 export const FILTER = "FILTER";
 export const ORDER = "ORDER";
+export const GET_FAVORITES = "GET_FAVORITES";
+export const SET_USER = "SET_USER";
+export const LOG_OUT = "LOG_OUT";
+export const POST_FAVORITE = "POST_FAVORITE";
