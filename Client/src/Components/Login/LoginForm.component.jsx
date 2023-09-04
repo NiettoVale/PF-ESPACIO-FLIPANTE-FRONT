@@ -21,19 +21,22 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:3001/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://espacioflipante.onrender.com/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const responseData = await response.json();
 
       if (response.status === 200) {
         alert(responseData.message);
-        navigate("/home");
+        navigate("/");
       } else if (response.status === 404) {
         alert(responseData.error);
       } else if (response.status === 401) {
