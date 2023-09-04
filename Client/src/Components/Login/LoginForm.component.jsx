@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { loginUserAction }  from '../../Redux/actions/usersActions';
-import { Link,useNavigate} from 'react-router-dom';
-import FacebookLogin from '../firebase/LoginFacebook';
-import GoogleLogin from '../firebase/LoginGoogle';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import FacebookLogin from "../firebase/LoginFacebook";
+import GoogleLogin from "../firebase/LoginGoogle";
+
+import styles from "./LoginForm.module.css";
 
 const LoginForm = () => {
-  // const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    name: '',
-    password: '',
+    name: "",
+    password: "",
   });
 
-  
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -20,17 +18,9 @@ const LoginForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // Envía los datos del formulario al servidor
-  //   dispatch(loginUserAction(formData));
-  // };
-
-  // Creamos una función que se ejecuta cuando enviamos el formulario.
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Realizamos una petición al backend usando fetch y le pasamos el método y lo que le queremos enviar.
       const response = await fetch("http://localhost:3001/login", {
         method: "POST",
         headers: {
@@ -38,56 +28,72 @@ const LoginForm = () => {
         },
         body: JSON.stringify(formData),
       });
-      // Obtenemos los datos de la respuesta de la petición y los almacenamos
+
       const responseData = await response.json();
 
-      // Verificamos el estado de las posibles respuestas del servidor y mostramos adecuadamente los mensajes:
       if (response.status === 200) {
         alert(responseData.message);
-        navigate('/home');
-        
-        
-        // window.location.reload();
+        navigate("/home");
+      } else if (response.status === 404) {
+        alert(responseData.error);
+      } else if (response.status === 401) {
+        alert(responseData.error);
+      } else if (response.status === 500) {
+        alert(responseData.error);
       }
     } catch (error) {
-      // Si hubo algún error que no es del servidor, lo mostramos
       alert("Algo salió mal.");
       console.log(error.message);
     }
   };
 
-  // console.log(formData)
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Nombre de Usuario</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder='nombre de usuario o email'
-        />
+    <div className={styles.loginView}>
+      <div className={styles.imageContainer}></div>
+
+      <div className={styles.loginContainer}>
+        <h2>¡Bienvenido de vuelta!</h2>
+        <h4>Ingresa tus datos</h4>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name">Nombre de Usuario</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="nombre de usuario o email"
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Contraseña</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="password"
+            />
+          </div>
+
+          <div className={styles.internalLogin}>
+            <button type="submit">Iniciar Sesión</button>
+          </div>
+
+          <div className={styles.externalLogin}>
+            <p>Tambien puedes:</p>
+            <GoogleLogin />
+            <FacebookLogin />
+          </div>
+        </form>
+        <p className={styles.registrate}>
+          ¿No tienes una cuenta?
+          <Link to="/register">
+            <a>¡Regístrate!</a>
+          </Link>
+        </p>
       </div>
-      <div>
-        <label htmlFor="password">Contraseña</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder='password'
-        />
-      </div>
-      <button type="submit" >Iniciar Sesión</button>
-      <Link to="/register">
-        <button>Registrarse</button>
-      </Link>
-      <div>
-      <GoogleLogin/>
-      <FacebookLogin/>
-      </div>
-    </form>
+    </div>
   );
 };
 

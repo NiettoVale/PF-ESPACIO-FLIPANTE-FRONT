@@ -4,6 +4,9 @@ import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 
+import styles from "./LoginButtons.module.css";
+import { BsFacebook } from "react-icons/bs";
+
 function FacebookLogin() {
   const navigate = useNavigate();
   const handleFacebooklogin = async () => {
@@ -17,7 +20,12 @@ function FacebookLogin() {
     }
   };
 
-  return <button onClick={handleFacebooklogin}>Login with Facebook</button>;
+  return (
+    <button onClick={handleFacebooklogin} className={styles.loginButtons}>
+      <BsFacebook className={styles.facebookIcon} />
+      Accede con Facebook
+    </button>
+  );
 }
 
 export default FacebookLogin;

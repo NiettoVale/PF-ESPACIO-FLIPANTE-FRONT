@@ -6,18 +6,15 @@ const NavBar = () => {
   return (
     <div className={styles.navContainer}>
       <div className={styles.navBar}>
-        <Link to={"/home"}>
-          <a>INICIO</a>
+        <Link to={"/home"} className={styles.link}>
+          INICIO
         </Link>
-        <a>CATALOGO</a>
-        <a>OFERTAS</a>
-      </div>
-
-      <div>
-             
-        <a className={styles.link}>ACCESO</a>
-      
-        <a className={styles.link}>CARRITO</a>
+        <Link to={"/home"} className={styles.link}>
+          CATALOGO
+        </Link>
+        <Link to={"/home"} className={styles.link}>
+          OFERTAS
+        </Link>
       </div>
     </div>
   );

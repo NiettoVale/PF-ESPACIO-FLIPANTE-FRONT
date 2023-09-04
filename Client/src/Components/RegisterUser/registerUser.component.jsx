@@ -16,7 +16,6 @@ const Registro = () => {
   const [registerErrors, setRegisterErrors] = useState({});
   const navigate = useNavigate();
 
-
   // Creamos una función que maneja los cambios de los inputs
   const handleChange = (event) => {
     // Destructuramos dos valores de target -> (name, value)
@@ -57,7 +56,7 @@ const Registro = () => {
       // Verificamos el estado de las posibles respuestas del servidor y mostramos adecuadamente los mensajes:
       if (response.status === 200) {
         alert(responseData.message);
-        navigate('/login');
+        navigate("/login");
         // window.location.reload();
       } else if (response.status === 400) {
         setRegisterErrors({ badRequest: responseData.message });
@@ -72,56 +71,62 @@ const Registro = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.form}>
-        <h2 className={styles.title}>Registro</h2>
+    <div className={styles.registerContainer}>
+      <div className={styles.registerImage}></div>
+      <div className={styles.formContainer}>
+        <div className={styles.form}>
+          <h2 className={styles.title}>Registro</h2>
 
-        <div className={styles.inputGroup}>
-          <input
-            className={styles.input}
-            type="text"
-            name="name"
-            value={newUser.name}
-            onChange={handleChange}
-            placeholder="Nombre de usuario"
-          />
-          {registerErrors.invalidName && (
-            <p className={styles.error}>{registerErrors.invalidName}</p>
-          )}
-          <input
-            className={styles.input}
-            type="text"
-            name="email"
-            value={newUser.email}
-            onChange={handleChange}
-            placeholder="Correo electrónico"
-          />
-          {registerErrors.invalidEmail && (
-            <p className={styles.error}>{registerErrors.invalidEmail}</p>
-          )}
-          <input
-            className={styles.input}
-            type="password"
-            name="password"
-            value={newUser.password}
-            onChange={handleChange}
-            placeholder="Contraseña"
-          />
-          {registerErrors.badRequest ? (
-            <p className={styles.error}>{registerErrors.badRequest}</p>
-          ) : (
-            registerErrors.invalidPassword && (
-              <p className={styles.error}>{registerErrors.invalidPassword}</p>
-            )
-          )}
+          <div className={styles.inputGroup}>
+            <input
+              className={styles.input}
+              type="text"
+              name="name"
+              value={newUser.name}
+              onChange={handleChange}
+              placeholder="Nombre de usuario"
+            />
+            {registerErrors.invalidName && (
+              <p className={styles.error}>{registerErrors.invalidName}</p>
+            )}
+            <input
+              className={styles.input}
+              type="text"
+              name="email"
+              value={newUser.email}
+              onChange={handleChange}
+              placeholder="Correo electrónico"
+            />
+            {registerErrors.invalidEmail && (
+              <p className={styles.error}>{registerErrors.invalidEmail}</p>
+            )}
+            <input
+              className={styles.input}
+              type="password"
+              name="password"
+              value={newUser.password}
+              onChange={handleChange}
+              placeholder="Contraseña"
+            />
+            {registerErrors.badRequest ? (
+              <p className={styles.error}>{registerErrors.badRequest}</p>
+            ) : (
+              registerErrors.invalidPassword && (
+                <p className={styles.error}>{registerErrors.invalidPassword}</p>
+              )
+            )}
+          </div>
+
+          <button className={styles.button} onClick={handleSubmit}>
+            Registrar
+          </button>
+
+          <Link to={"/login"}>
+            <a>
+              ¿Ya tienes una cuenta? <span>Inicia sesión</span>
+            </a>
+          </Link>
         </div>
-        <button className={styles.button} onClick={handleSubmit}>
-          Registrar
-        </button>
-
-        <Link to={"/"}>
-          <button className={styles.button}>Iniciar Sesión</button>
-        </Link>
       </div>
     </div>
   );

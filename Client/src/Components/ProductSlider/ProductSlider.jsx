@@ -1,15 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
-
+import { Swiper, SwiperSlide } from "swiper/react";
 import SliderCard from "./SliderCard";
 import PropTypes from "prop-types";
 import styles from "./ProductSlider.module.css";
-
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 
-const ProductSlider = () => {
-  const products = useSelector((state) => state.products);
+const ProductSlider = ({ products }) => {
   const first10Products = products.slice(0, 10);
 
   return (
