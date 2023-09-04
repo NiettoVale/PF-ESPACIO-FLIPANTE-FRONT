@@ -6,13 +6,13 @@ const NavBar = () => {
   return (
     <div className={styles.navContainer}>
       <div className={styles.navBar}>
-        <Link to={"/home"} className={styles.link}>
+        <Link to={"/"} className={styles.link}>
           INICIO
         </Link>
-        <Link to={"/home"} className={styles.link}>
+        <Link to={"/"} className={styles.link}>
           CATALOGO
         </Link>
-        <Link to={"/home"} className={styles.link}>
+        <Link to={"/"} className={styles.link}>
           OFERTAS
         </Link>
       </div>

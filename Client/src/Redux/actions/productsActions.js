@@ -12,7 +12,9 @@ import {
 export const getProducts = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("http://localhost:3001/products");
+      const response = await axios.get(
+        "https://espacioflipante.onrender.com/products"
+      );
       const products = response.data;
 
       dispatch({ type: GET_PRODUCTS, payload: products });
@@ -29,7 +31,7 @@ export const postProduct = (productData) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/products",
+        "https://espacioflipante.onrender.com/products",
         productData
       );
       const createdProduct = response.data;
@@ -47,7 +49,9 @@ export const postProduct = (productData) => {
 export const getSizes = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios("http://localhost:3001/sizes");
+      const { data } = await axios(
+        "https://espacioflipante.onrender.com/sizes"
+      );
 
       dispatch({ type: GET_SIZES, payload: data });
     } catch (error) {
@@ -60,7 +64,9 @@ export const getSizes = () => {
 export const getGenders = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios("http://localhost:3001/gender");
+      const { data } = await axios(
+        "https://espacioflipante.onrender.com/gender"
+      );
 
       dispatch({ type: GET_GENDER, payload: data });
     } catch (error) {
@@ -73,7 +79,9 @@ export const getGenders = () => {
 export const getCategory = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios("http://localhost:3001/category");
+      const { data } = await axios(
+        "https://espacioflipante.onrender.com/category"
+      );
 
       dispatch({ type: GET_CATEGORY, payload: data });
     } catch (error) {
@@ -95,13 +103,16 @@ export const getFilters = (dataFilter) => {
         return;
       }
 
-      const response = await fetch("http://localhost:3001/filter", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataFilter),
-      });
+      const response = await fetch(
+        "https://espacioflipante.onrender.com/filter",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataFilter),
+        }
+      );
 
       const data = await response.json();
 
