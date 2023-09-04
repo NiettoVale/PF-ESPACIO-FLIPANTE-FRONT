@@ -11,7 +11,9 @@ export default function Detail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/detail/${id}`);
+        const response = await fetch(
+          `https://espacioflipante.onrender.com/detail/${id}`
+        );
 
         const data = await response.json();
 
@@ -35,7 +37,7 @@ export default function Detail() {
   return (
     <div>
       <NavBar />
-      <Link to={"/home"}>
+      <Link to={"/"}>
         <button className={styles.backButton}>⬅</button>
       </Link>
 

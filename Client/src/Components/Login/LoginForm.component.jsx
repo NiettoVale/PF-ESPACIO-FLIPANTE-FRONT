@@ -32,8 +32,8 @@ const LoginForm = () => {
       const responseData = await response.json();
 
       if (response.status === 200) {
-        alert(responseData.message);
-        navigate("/home");
+        // alert(responseData.message);
+        navigate("/profile", { state: { userInfo: responseData } });
       } else if (response.status === 404) {
         alert(responseData.error);
       } else if (response.status === 401) {

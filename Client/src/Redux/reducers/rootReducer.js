@@ -5,7 +5,10 @@ import {
   FILTER,
   GET_CATEGORY,
   GET_GENDER,
+  SET_USER,
   ORDER,
+  GET_FAVORITES,
+  LOG_OUT,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -14,6 +17,8 @@ const initialState = {
   sizes: [],
   genders: [],
   category: [],
+  myFavorites: [],
+  userInfo: [],
   order: "asc",
 };
 
@@ -24,10 +29,23 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
       };
+
     case GET_CATEGORY:
       return {
         ...state,
         category: action.payload,
+      };
+
+    case GET_FAVORITES:
+      return {
+        ...state,
+        myFavorites: action.payload,
+      };
+
+    case SET_USER:
+      return {
+        ...state,
+        userInfo: action.payload,
       };
 
     case GET_GENDER:
@@ -36,10 +54,10 @@ const rootReducer = (state = initialState, action) => {
         genders: action.payload,
       };
 
-    case FILTER:
+    case GET_SIZES:
       return {
         ...state,
-        productsFiltered: action.payload,
+        sizes: action.payload,
       };
 
     case POST_PRODUCT:
@@ -48,16 +66,22 @@ const rootReducer = (state = initialState, action) => {
         products: [...state.products, action.payload],
       };
 
-    case GET_SIZES:
-      return {
-        ...state,
-        sizes: action.payload,
-      };
-
     case ORDER:
       return {
         ...state,
         order: action.payload,
+      };
+
+    case FILTER:
+      return {
+        ...state,
+        productsFiltered: action.payload,
+      };
+
+    case LOG_OUT:
+      return {
+        ...state,
+        userInfo: [],
       };
 
     default:
