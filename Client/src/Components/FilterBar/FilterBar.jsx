@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ImMenu } from "react-icons/im";
-import { AiFillCloseCircle } from "react-icons/ai";
-
 import styles from "./FilterBar.module.css";
 import {
   getFilters,
   getSizes,
+  getPrices,
   setOrderByName,
+  setOrderByPrice,
 } from "../../Redux/actions/productsActions";
 
 const initialState = {
   category: "",
   size: "",
   gender: "",
+  minPrice: "",
+  maxPrice: "",
 };
 
 const FilterBar = () => {
@@ -44,16 +45,20 @@ const FilterBar = () => {
 
   const handleSortChange = (event) => {
     const selectedOrder = event.target.value;
-    if (selectedOrder === "") {
-      dispatch(setOrderByName(null)); // Usar null para indicar que no se aplique orden
-    } else {
+
+    if (selectedOrder === "asc" || selectedOrder === "desc") {
       dispatch(setOrderByName(selectedOrder));
+      dispatch(setOrderByPrice(null));
+    } else if (selectedOrder === "priceAsc" || selectedOrder === "priceDesc") {
+      dispatch(setOrderByPrice(selectedOrder));
+      dispatch(setOrderByName(null));
     }
   };
 
   useEffect(() => {
     dispatch(getFilters(dataFilter));
     dispatch(getSizes());
+    dispatch(getPrices(dataFilter.minPrice, dataFilter.maxPrice)); // Llama a la acción getPrices con los valores de minPrice y maxPrice
   }, [dataFilter, dispatch]);
 
   const [filtersBar, setFiltersBar] = useState(false);
@@ -91,6 +96,31 @@ const FilterBar = () => {
             </select>
           </div>
 
+          <div className={styles.priceSelect}>
+            <input
+              type="number"
+              placeholder="Precio mínimo"
+              value={dataFilter.minPrice}
+              onChange={(e) =>
+                setDataFilter((prevData) => ({
+                  ...prevData,
+                  minPrice: e.target.value,
+                }))
+              }
+            />
+            <input
+              type="number"
+              placeholder="Precio máximo"
+              value={dataFilter.maxPrice}
+              onChange={(e) =>
+                setDataFilter((prevData) => ({
+                  ...prevData,
+                  maxPrice: e.target.value,
+                }))
+              }
+            />
+          </div>
+
           <div className={styles.categorySelect}>
             <select
               onChange={handleCategoryChange}
@@ -110,20 +140,6 @@ const FilterBar = () => {
             </select>
           </div>
 
-          <div className={styles.orderSelect}>
-            <select
-              id="Alphabetical"
-              onChange={handleSortChange}
-              value={dataFilter.order}
-            >
-              <option value="" disabled>
-                Seleccionar orden
-              </option>
-              <option value="asc">A-Z</option>
-              <option value="desc">Z-A</option>
-            </select>
-          </div>
-
           <div className={styles.sizesSelect}>
             <select name="sizes" value={dataFilter.size} onChange={handleSizes}>
               <option value="">Seleccionar talless</option>
@@ -132,6 +148,22 @@ const FilterBar = () => {
                   {size}
                 </option>
               ))}
+            </select>
+          </div>
+
+          <div className={styles.orderSelect}>
+            <select
+              id="SortSelect"
+              onChange={handleSortChange}
+              value={dataFilter.order}
+            >
+              <option value="" disabled>
+                ORDENAR
+              </option>
+              <option value="asc">A-Z</option>
+              <option value="desc">Z-A</option>
+              <option value="priceAsc">MENOR PRECIO</option>
+              <option value="priceDesc">MAYOR PRECIO</option>
             </select>
           </div>
 

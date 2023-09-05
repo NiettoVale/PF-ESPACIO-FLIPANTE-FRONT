@@ -1,13 +1,14 @@
 import {
   GET_PRODUCTS,
-  GET_SIZES,
   POST_PRODUCT,
   FILTER,
+  GET_SIZES,
   GET_CATEGORY,
   GET_GENDER,
-  SET_USER,
+  GET_PRICES,
   ORDER,
   GET_FAVORITES,
+  SET_USER,
   LOG_OUT,
 } from "../actions/actionTypes";
 
@@ -17,6 +18,7 @@ const initialState = {
   sizes: [],
   genders: [],
   category: [],
+  prices: [],
   myFavorites: [],
   userInfo: [],
   order: "asc",
@@ -59,6 +61,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         sizes: action.payload,
       };
+    case GET_PRICES:
+      return {
+        ...state,
+        prices: action.payload,
+      };
 
     case POST_PRODUCT:
       return {
@@ -67,6 +74,11 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case ORDER:
+      return {
+        ...state,
+        order: action.payload,
+      };
+    case POST_PRODUCT:
       return {
         ...state,
         order: action.payload,
