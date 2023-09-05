@@ -24,3 +24,9 @@
 
   background-color: #fff;
 }
+
+.divUserContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaciado entre elementos */
+}
