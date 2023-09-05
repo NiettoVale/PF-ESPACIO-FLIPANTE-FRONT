@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./register.module.css";
 import validationRegister from "./validationRegister";
+const back = process.env.REACT_APP_BACK;
 
 const Registro = () => {
   // Creamos un estado local para almacenar al nuevo usuario
@@ -42,16 +43,13 @@ const Registro = () => {
   const handleSubmit = async () => {
     try {
       // Realizamos una petición al backend usando fetch y le pasamos el método y lo que le queremos enviar.
-      const response = await fetch(
-        "https://espacioflipante.onrender.com/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newUser),
-        }
-      );
+      const response = await fetch(`${back}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      });
 
       // Obtenemos los datos de la respuesta de la petición y los almacenamos
       const responseData = await response.json();

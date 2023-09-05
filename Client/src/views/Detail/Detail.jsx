@@ -2,11 +2,37 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from "./Detail.module.css";
 import NavBar from "../../Components/NavBar/navBar";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addFavorite,
+  getFavorites,
+  getUserByName,
+  removeFromFavorites,
+} from "../../Redux/actions/productsActions";
 
 export default function Detail() {
   const { id } = useParams();
   const [cardDetail, setCardDetail] = useState({});
   const [imageDetail, setImageDetail] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const name = localStorage.getItem("username");
+  const user = useSelector((state) => state.infoUser);
+  const favorites = useSelector((state) => state.myFavorites);
+
+  let userId = 0;
+  if (user.length > 0) {
+    userId = user[0].id;
+  }
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserByName(name));
+    if (userId) {
+      dispatch(getFavorites(userId));
+    }
+  }, [dispatch, name, userId]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +60,23 @@ export default function Detail() {
     fetchData();
   }, [id]);
 
+  const handleToggleFavorites = () => {
+    if (isFavorite) {
+      dispatch(removeFromFavorites(userId, id)); // Elimina de favoritos
+    } else {
+      dispatch(addFavorite(userId, id)); // Agrega a favoritos
+    }
+    // Actualiza el estado después de que la acción se haya completado
+    setIsFavorite(!isFavorite); // Cambia el estado para reflejar si es favorito o no
+  };
+
+  useEffect(() => {
+    if (user && user.length > 0 && favorites) {
+      const favoriteProductIds = favorites.map((favorite) => favorite.id);
+      setIsFavorite(favoriteProductIds.includes(parseInt(id)));
+    }
+  }, [id, user]);
+
   return (
     <div>
       <NavBar />
@@ -46,6 +89,7 @@ export default function Detail() {
           {imageDetail.map((url, index) =>
             url ? (
               <img
+                key={index}
                 src={url}
                 alt={cardDetail.name}
                 className={index === 0 ? styles.mainImage : styles.thumbnail}
@@ -58,11 +102,11 @@ export default function Detail() {
           <p className={styles.detailName}>{cardDetail.name}</p>
 
           <div className={styles.sizesButtons}>
-            <button>S</button>
-            <button>M</button>
-            <button>L</button>
-            <button>XL</button>
-            <button>XXL</button>
+            <button key="S">S</button>
+            <button key="M">M</button>
+            <button key="L">L</button>
+            <button key="XL">XL</button>
+            <button key="XXL">XXL</button>
           </div>
 
           <div>
@@ -79,7 +123,13 @@ export default function Detail() {
           <p className={styles.detailPrice}>${cardDetail.price}</p>
 
           <div className={styles.detailButtons}>
-            <button className={styles.favButton}>AGREGAR A FAVORITOS</button>
+            <button
+              className={styles.favButton}
+              onClick={handleToggleFavorites}
+            >
+              {isFavorite ? "Eliminar de Favoritos" : "Agregar a Favoritos"}
+            </button>
+
             <button className={styles.cartButton}>AGREGAR AL CARRITO</button>
           </div>
         </div>

@@ -7,14 +7,16 @@ import {
   GET_CATEGORY,
   GET_GENDER,
   ORDER,
+  GET_USER_NAME,
+  FAVORITES,
 } from "./actionTypes";
+
+const back = process.env.REACT_APP_BACK;
 
 export const getProducts = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(
-        "https://espacioflipante.onrender.com/products"
-      );
+      const response = await axios.get(`${back}/products`);
       const products = response.data;
 
       dispatch({ type: GET_PRODUCTS, payload: products });
@@ -30,10 +32,7 @@ export const getProducts = () => {
 export const postProduct = (productData) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        "https://espacioflipante.onrender.com/products",
-        productData
-      );
+      const response = await axios.post(`${back}/products`, productData);
       const createdProduct = response.data;
 
       dispatch({ type: POST_PRODUCT, payload: createdProduct });
@@ -49,9 +48,7 @@ export const postProduct = (productData) => {
 export const getSizes = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(
-        "https://espacioflipante.onrender.com/sizes"
-      );
+      const { data } = await axios(`${back}/sizes`);
 
       dispatch({ type: GET_SIZES, payload: data });
     } catch (error) {
@@ -64,9 +61,7 @@ export const getSizes = () => {
 export const getGenders = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(
-        "https://espacioflipante.onrender.com/gender"
-      );
+      const { data } = await axios(`${back}/gender`);
 
       dispatch({ type: GET_GENDER, payload: data });
     } catch (error) {
@@ -79,9 +74,7 @@ export const getGenders = () => {
 export const getCategory = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(
-        "https://espacioflipante.onrender.com/category"
-      );
+      const { data } = await axios(`${back}/category`);
 
       dispatch({ type: GET_CATEGORY, payload: data });
     } catch (error) {
@@ -103,16 +96,13 @@ export const getFilters = (dataFilter) => {
         return;
       }
 
-      const response = await fetch(
-        "https://espacioflipante.onrender.com/filter",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataFilter),
-        }
-      );
+      const response = await fetch(`${back}/filter`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFilter),
+      });
 
       const data = await response.json();
 
@@ -121,6 +111,93 @@ export const getFilters = (dataFilter) => {
       }
 
       dispatch({ type: FILTER, payload: data });
+    } catch (error) {
+      alert("Algo salió mal!!!");
+      console.log(error);
+    }
+  };
+};
+
+export const getUserByName = (name) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${back}/profile/${name}`);
+
+      const data = await response.json();
+
+      if (response.status === 404) {
+        alert(data.message);
+      }
+
+      dispatch({ type: GET_USER_NAME, payload: data });
+    } catch (error) {
+      alert("Algo salió mal!!!");
+      console.log(error);
+    }
+  };
+};
+
+export const addFavorite = (userId, productId) => {
+  return async () => {
+    try {
+      const response = await fetch(
+        `${back}/users/${userId}/products/${productId}/favorite`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.status === 200) {
+        alert(data.message);
+      }
+    } catch (error) {
+      alert("Algo salió mal!!!");
+      console.log(error);
+    }
+  };
+};
+
+export const getFavorites = (userId) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${back}/favorites/${userId}`);
+
+      const data = await response.json();
+
+      if (response.status === 404) {
+        alert(data.message);
+      }
+
+      dispatch({ type: FAVORITES, payload: data });
+    } catch (error) {
+      alert("Algo salió mal!!!");
+      console.log(error);
+    }
+  };
+};
+
+export const removeFromFavorites = (userId, productId) => {
+  return async () => {
+    try {
+      const response = await fetch(`${back}/favorites/${userId}/${productId}`, {
+        method: "DELETE", // Utiliza el método DELETE para eliminar el producto de favoritos
+      });
+
+      const data = await response.json();
+
+      if (response.status === 404) {
+        alert(data.message);
+      }
+
+      if (response.status === 200) {
+        alert(data.message);
+        window.location.href = "/userProfile";
+      }
     } catch (error) {
       alert("Algo salió mal!!!");
       console.log(error);

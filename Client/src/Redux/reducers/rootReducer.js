@@ -6,6 +6,9 @@ import {
   GET_CATEGORY,
   GET_GENDER,
   ORDER,
+  GET_USER_NAME,
+  FAVORITES,
+  REMOVE_FROM_FAVORITES,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -14,7 +17,9 @@ const initialState = {
   sizes: [],
   genders: [],
   category: [],
+  infoUser: [],
   order: "asc",
+  myFavorites: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -60,6 +65,28 @@ const rootReducer = (state = initialState, action) => {
         order: action.payload,
       };
 
+    case GET_USER_NAME:
+      return {
+        ...state,
+        infoUser: [action.payload],
+      };
+    case FAVORITES:
+      return {
+        ...state,
+        myFavorites: action.payload,
+      };
+    case REMOVE_FROM_FAVORITES:
+      const updatedFavorites = state.myFavorites.filter(
+        (product) => parseInt(product.id) !== parseInt(action.payload)
+      );
+
+      console.log(`favas antiguos:`, state.myFavorites);
+      console.log(`favs:`, updatedFavorites);
+
+      return {
+        ...state,
+        myFavorites: updatedFavorites,
+      };
     default:
       return state;
   }
