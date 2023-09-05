@@ -1,6 +1,6 @@
 .heroContainer {
   height: 1000px;
-  width: 98.9vw;
+  width: 100vw;
   margin: 0;
 
   display: flex;
@@ -45,6 +45,8 @@
 }
 .heroText button {
   margin-top: 70px;
+
+  padding: 10px 20px;
 
   border-radius: 50px;
   border: solid 2px #fff;

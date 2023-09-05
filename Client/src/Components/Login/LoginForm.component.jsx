@@ -21,7 +21,9 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+
       const response = await fetch(`${back}/login`, {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,10 +34,15 @@ const LoginForm = () => {
       const responseData = await response.json();
 
       if (response.status === 200) {
+
+        // alert(responseData.message);
+        navigate("/profile", { state: { userInfo: responseData } });
+
         // Al inicio de sesión exitoso, guarda la información en localStorage
         localStorage.setItem("username", formData.name);
         alert("Inicio de sesion exitoso!!");
         navigate("/");
+
       } else if (response.status === 404) {
         alert(responseData.error);
       } else if (response.status === 401) {

@@ -42,8 +42,10 @@ const Registro = () => {
   // Creamos una función que se ejecuta cuando enviamos el formulario.
   const handleSubmit = async () => {
     try {
-      // Realizamos una petición al backend usando fetch y le pasamos el método y lo que le queremos enviar.
+      // Realizamos una petición al backend usando fetch y le pasamos el método y lo que le queremos enviar. 
+
       const response = await fetch(`${back}/register`, {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,14 +1,17 @@
 import React from "react";
-import styles from "./card.module.css";
 import { Link } from "react-router-dom";
+import styles from "./card.module.css";
 
 const Card = ({ name, images, price, category, id }) => {
+
+
   return (
+
+
     <div className={styles.cardContainer}>
       <Link to={`/detail/${id}`}>
         <p className={styles.hoverMessage}>VER DETALLES</p>
       </Link>
-
       {/* Mostrar la imagen */}
       {images ? (
         <img src={images[0]} alt={name} className={styles.imgCard} />

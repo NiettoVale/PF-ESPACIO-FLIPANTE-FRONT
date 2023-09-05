@@ -2,7 +2,9 @@ import React from "react";
 import styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";
 
+
 const NavBar = () => {
+
   const storedUsername = localStorage.getItem("username");
 
   const logOut = () => {
@@ -12,6 +14,7 @@ const NavBar = () => {
 
     // También puedes redirigir al usuario a una página de inicio de sesión o a donde sea necesario después de cerrar sesión.
     // window.location.href = "/login"; // Por ejemplo, redirige a la página de inicio de sesión
+
   };
 
   return (
@@ -26,7 +29,6 @@ const NavBar = () => {
         <Link to={"/"} className={styles.link}>
           OFERTAS
         </Link>
-
         {storedUsername ? (
           <div>
             <Link to={"/userProfile"}>{storedUsername.toUpperCase()}</Link>

@@ -113,7 +113,7 @@ const Home = () => {
       <div className="cards-container">
         {productsFiltered.length > 0 ? (
           <>
-            <h2>Soy filtrado</h2>
+            <h2>Productos seleccionados</h2>
             <Cards products={productsFiltered} />
           </>
         ) : null}
