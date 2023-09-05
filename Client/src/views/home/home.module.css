@@ -18,6 +18,11 @@
 .spaceBetween {
   width: 16px; /* Puedes ajustar el valor según el espacio deseado */
 }
+
+.filterButton {
+  position: absolute;
+  right: 10px;
+
 .paginationButtons {
   display: flex;
   flex-direction: row;
@@ -55,4 +60,5 @@
 
 .paginationButtons button:last-of-type {
   padding-right: 3px;
+
 }

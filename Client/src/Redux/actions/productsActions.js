@@ -4,6 +4,7 @@ import {
   GET_SIZES,
   GET_CATEGORY,
   GET_GENDER,
+  GET_PRICES,
   GET_FAVORITES,
   POST_PRODUCT,
   FILTER,
@@ -11,6 +12,7 @@ import {
   SET_USER,
   LOG_OUT,
   POST_FAVORITE,
+  PRICE_ORDER,
 } from "./actionTypes";
 
 export const getProducts = () => {
@@ -57,7 +59,7 @@ export const setUser = (userData) => {
     try {
       dispatch({ type: SET_USER, payload: userData });
     } catch (error) {
-      alert("Algo salió mal!!!");
+      alert("Algo salió mal");
       console.log(error);
     }
   };
@@ -68,7 +70,7 @@ export const logOut = () => {
     try {
       dispatch({ type: LOG_OUT });
     } catch (error) {
-      alert("Algo salió mal!!!");
+      alert("Algo salió mal con el log out");
       console.log(error);
     }
   };
@@ -83,7 +85,22 @@ export const getSizes = () => {
 
       dispatch({ type: GET_SIZES, payload: data });
     } catch (error) {
-      alert("Algo salió mal!!!");
+      alert("Algo salió mal con los sizes");
+      console.error(error);
+    }
+  };
+};
+
+export const getPrices = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(
+        "https://espacioflipante.onrender.com/prices"
+      );
+
+      dispatch({ type: GET_PRICES, payload: data });
+    } catch (error) {
+      alert("Algo salió mal con los precios ");
       console.error(error);
     }
   };
@@ -98,7 +115,7 @@ export const getGenders = () => {
 
       dispatch({ type: GET_GENDER, payload: data });
     } catch (error) {
-      alert("Algo salió mal!!!");
+      alert("Algo salió mal con el gender");
       console.error(error);
     }
   };
@@ -113,7 +130,7 @@ export const getCategory = () => {
 
       dispatch({ type: GET_CATEGORY, payload: data });
     } catch (error) {
-      alert("Algo salió mal!!!");
+      alert("Algo salió mal las categorias");
       console.error(error);
     }
   };
@@ -193,4 +210,7 @@ export const favorite = async (userId, productId) => {
 
 export const setOrderByName = (order) => {
   return { type: ORDER, payload: order };
+};
+export const setOrderByPrice = (order) => {
+  return { type: PRICE_ORDER, payload: order };
 };

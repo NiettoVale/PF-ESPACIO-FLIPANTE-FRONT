@@ -16,13 +16,19 @@
 
   background-color: #fff;
 }
-
+.searchBarContainer input {
+  margin: 0 20px;
+}
 .flexSpace {
   flex: 1;
 }
 
-.link {
+.acceso {
   text-decoration: none;
   margin-right: 16px;
   /* Estilos para los enlaces "ACCESO" y "CARRITO" */
+}
+.carrito {
+  text-decoration: none;
+  margin-right: 0;
 }
