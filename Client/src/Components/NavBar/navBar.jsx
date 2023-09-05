@@ -1,14 +1,20 @@
 import React from "react";
 import styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../../Redux/actions/productsActions";
+
 
 const NavBar = () => {
-  const userInfo = useSelector((state) => state.userInfo);
-  const dispatch = useDispatch();
-  const logout = () => {
-    dispatch(logOut());
+
+  const storedUsername = localStorage.getItem("username");
+
+  const logOut = () => {
+    // Elimina la clave "username" del localStorage
+    localStorage.removeItem("username");
+    window.location.reload();
+
+    // También puedes redirigir al usuario a una página de inicio de sesión o a donde sea necesario después de cerrar sesión.
+    // window.location.href = "/login"; // Por ejemplo, redirige a la página de inicio de sesión
+
   };
 
   return (
@@ -23,21 +29,19 @@ const NavBar = () => {
         <Link to={"/"} className={styles.link}>
           OFERTAS
         </Link>
-
-        {userInfo && userInfo.name ? (
-          <div className={styles.divUserContainer}>
-            <Link to={"/profile"}>
-              <img src="https://acortar.link/ny88Fm" alt="" />
+        {storedUsername ? (
+          <div>
+            <Link to={"/userProfile"}>{storedUsername.toUpperCase()}</Link>
+            <Link to={"/userProfile"}>
+              <img src="https://acortar.link/ny88Fm" alt="profile" />
             </Link>
-            <Link to={"/profile"}>
-              <h3>{userInfo.name}</h3>
+            <Link to={"/"}>
+              <img
+                src="https://acortar.link/stkkZX"
+                alt="logOut"
+                onClick={logOut}
+              />
             </Link>
-
-            <img
-              src="https://acortar.link/stkkZX"
-              alt="logout"
-              onClick={logout}
-            />
           </div>
         ) : null}
       </div>

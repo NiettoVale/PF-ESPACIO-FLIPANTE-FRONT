@@ -5,10 +5,10 @@ import {
   FILTER,
   GET_CATEGORY,
   GET_GENDER,
-  SET_USER,
   ORDER,
-  GET_FAVORITES,
-  LOG_OUT,
+  GET_USER_NAME,
+  FAVORITES,
+  REMOVE_FROM_FAVORITES,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -17,9 +17,9 @@ const initialState = {
   sizes: [],
   genders: [],
   category: [],
-  myFavorites: [],
-  userInfo: [],
+  infoUser: [],
   order: "asc",
+  myFavorites: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -29,23 +29,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
       };
-
     case GET_CATEGORY:
       return {
         ...state,
         category: action.payload,
-      };
-
-    case GET_FAVORITES:
-      return {
-        ...state,
-        myFavorites: action.payload,
-      };
-
-    case SET_USER:
-      return {
-        ...state,
-        userInfo: action.payload,
       };
 
     case GET_GENDER:
@@ -54,10 +41,10 @@ const rootReducer = (state = initialState, action) => {
         genders: action.payload,
       };
 
-    case GET_SIZES:
+    case FILTER:
       return {
         ...state,
-        sizes: action.payload,
+        productsFiltered: action.payload,
       };
 
     case POST_PRODUCT:
@@ -66,24 +53,40 @@ const rootReducer = (state = initialState, action) => {
         products: [...state.products, action.payload],
       };
 
+    case GET_SIZES:
+      return {
+        ...state,
+        sizes: action.payload,
+      };
+
     case ORDER:
       return {
         ...state,
         order: action.payload,
       };
 
-    case FILTER:
+    case GET_USER_NAME:
       return {
         ...state,
-        productsFiltered: action.payload,
+        infoUser: [action.payload],
       };
-
-    case LOG_OUT:
+    case FAVORITES:
       return {
         ...state,
-        userInfo: [],
+        myFavorites: action.payload,
       };
+    case REMOVE_FROM_FAVORITES:
+      const updatedFavorites = state.myFavorites.filter(
+        (product) => parseInt(product.id) !== parseInt(action.payload)
+      );
 
+      console.log(`favas antiguos:`, state.myFavorites);
+      console.log(`favs:`, updatedFavorites);
+
+      return {
+        ...state,
+        myFavorites: updatedFavorites,
+      };
     default:
       return state;
   }

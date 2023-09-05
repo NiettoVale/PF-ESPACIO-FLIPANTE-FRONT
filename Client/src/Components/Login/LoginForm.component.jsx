@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import FacebookLogin from "../firebase/LoginFacebook";
 import GoogleLogin from "../firebase/LoginGoogle";
-
 import styles from "./LoginForm.module.css";
+const back = process.env.REACT_APP_BACK;
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +21,9 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:3001/login", {
+
+      const response = await fetch(`${back}/login`, {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,8 +34,15 @@ const LoginForm = () => {
       const responseData = await response.json();
 
       if (response.status === 200) {
+
         // alert(responseData.message);
         navigate("/profile", { state: { userInfo: responseData } });
+
+        // Al inicio de sesión exitoso, guarda la información en localStorage
+        localStorage.setItem("username", formData.name);
+        alert("Inicio de sesion exitoso!!");
+        navigate("/");
+
       } else if (response.status === 404) {
         alert(responseData.error);
       } else if (response.status === 401) {
@@ -46,6 +55,15 @@ const LoginForm = () => {
       console.log(error.message);
     }
   };
+
+  useEffect(() => {
+    // Verificar si hay información de usuario almacenada en localStorage
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      // Si hay información, puedes usarla como necesites, por ejemplo, para llenar un campo de formulario
+      setFormData({ ...formData, name: storedUsername });
+    }
+  }, [formData]);
 
   return (
     <div className={styles.loginView}>
@@ -81,7 +99,7 @@ const LoginForm = () => {
           </div>
 
           <div className={styles.externalLogin}>
-            <p>Tambien puedes:</p>
+            <p>También puedes:</p>
             <GoogleLogin />
             <FacebookLogin />
           </div>

@@ -8,5 +8,7 @@ export const FILTER = "FILTER";
 export const ORDER = "ORDER";
 export const GET_FAVORITES = "GET_FAVORITES";
 export const SET_USER = "SET_USER";
-export const LOG_OUT = "LOG_OUT";
 export const POST_FAVORITE = "POST_FAVORITE";
+export const GET_USER_NAME = "GET_USER_NAME";
+export const FAVORITES = "FAVORITES";
+

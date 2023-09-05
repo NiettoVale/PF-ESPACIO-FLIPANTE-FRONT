@@ -19,7 +19,6 @@ const initialState = {
 
 const FilterBar = () => {
   const dispatch = useDispatch();
-
   const [dataFilter, setDataFilter] = useState(initialState);
   const sizes = useSelector((state) => state.sizes);
 
